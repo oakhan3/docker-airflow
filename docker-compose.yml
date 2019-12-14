@@ -14,6 +14,7 @@ services:
             - PGDATA=/var/lib/postgresql/data/pgdata
         # volumes:
             - ./pgdata:/var/lib/postgresql/data/pgdata
+            - /var/run/docker.sock:/var/run/docker.sock
 
     webserver:
         image: puckel/docker-airflow:1.10.6
@@ -31,6 +32,7 @@ services:
             - REDIS_PASSWORD=redispass
         volumes:
             - /home/ec2-user/dags:/usr/local/airflow/dags
+            - /var/run/docker.sock:/var/run/docker.sock
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         ports:
@@ -53,6 +55,8 @@ services:
         ports:
             - "5555:5555"
         command: flower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
 
     scheduler:
         image: puckel/docker-airflow:1.10.6
@@ -61,6 +65,7 @@ services:
             - webserver
         volumes:
             - /home/ec2-user/dags:/usr/local/airflow/dags
+            - /var/run/docker.sock:/var/run/docker.sock
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         environment:
@@ -80,6 +85,7 @@ services:
             - scheduler
         volumes:
             - /home/ec2-user/dags:/usr/local/airflow/dags
+            - /var/run/docker.sock:/var/run/docker.sock
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         environment:
