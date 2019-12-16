@@ -32,6 +32,7 @@ services:
             - REDIS_PASSWORD=redispass
         volumes:
             - /home/ec2-user/dags:/usr/local/airflow/dags
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             - /var/run/docker.sock:/var/run/docker.sock
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
@@ -66,6 +67,7 @@ services:
         volumes:
             - /home/ec2-user/dags:/usr/local/airflow/dags
             - /var/run/docker.sock:/var/run/docker.sock
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         environment:
@@ -86,6 +88,7 @@ services:
         volumes:
             - /home/ec2-user/dags:/usr/local/airflow/dags
             - /var/run/docker.sock:/var/run/docker.sock
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         environment:
